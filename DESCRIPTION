@@ -4,7 +4,7 @@ Title: Process Feed efficiency files
 Version: 0.1.0
 Author: person("Guillermo", "Martinez Boggio", "guillermo.martinezboggio@wisc.edu", role = c("aut", "cre"))
 Maintainer: Guillermo Martinez Boggio <guillermo.martinezboggio@wisc.edu>
-Description: Convinient functions to process feed efficiency data and
+Description: Convenient functions to process feed efficiency data and
     work with different type of feed efficiency files.
 License: MIT + file LICENSE
 Encoding: UTF-8
