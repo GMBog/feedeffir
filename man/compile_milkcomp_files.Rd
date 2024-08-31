@@ -2,10 +2,9 @@
 % Please edit documentation in R/compile_milkcomp_files.R
 \name{compile_milkcomp_files}
 \alias{compile_milkcomp_files}
-\alias{process_milkcomp_files}
-\title{compile_milkcomp_files}
+\title{Compile Milk Composition Files}
 \usage{
-process_milkcomp_files(file_list)
+compile_milkcomp_files(Trial = NA, Dir = NA)
 }
 \arguments{
 \item{Trial}{Name of the trial}
@@ -16,5 +15,5 @@ process_milkcomp_files(file_list)
 A table with the compiled milk composition files
 }
 \description{
-Compile milk composition files
+`compile_milkcomp_files()` compiles and formats milk composition files
 }

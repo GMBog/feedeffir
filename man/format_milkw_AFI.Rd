@@ -2,11 +2,7 @@
 % Please edit documentation in R/format_milkw_AFI.R
 \name{format_milkw_AFI}
 \alias{format_milkw_AFI}
-\alias{process_AFI_files}
 \title{format_milkw_AFI}
-\usage{
-process_AFI_files(file_list)
-}
 \arguments{
 \item{Trial}{Name of the trial}
 
@@ -18,5 +14,11 @@ process_AFI_files(file_list)
 A table with the compiled milk weights from AFI system
 }
 \description{
-Format milk weights from AFI.
+`format_milkw_AFI()` compiles and formats milk weights files
+    from AFI computer at the farm. First, it will compile cow files and
+    then compile using the animal ID the milk weights with the previous ones.
+}
+\details{
+This function uses two helper functions:
+- `process_AFI_files`: Processes AFI files to extract and format milk weights.
 }
