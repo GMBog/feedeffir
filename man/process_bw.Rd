@@ -17,9 +17,9 @@ process_bw(file, start_date, end_date)
 \item{rfid_tbl}{Data frame with rfid and experiment information}
 }
 \value{
-Two data frames with the following data:
-    \item{metabolic body weights}
-    \item{delta body weights}
+A list containing two data frames:
+    \item{metabolic_bw}{Data frame containing metabolic body weights summary.}
+    \item{delta_bw}{Data frame containing delta body weights.}
 }
 \description{
 Process body weights files, and compute metabolic body weights and

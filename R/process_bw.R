@@ -10,9 +10,9 @@
 #' @param start_date A Date object representing the start date for the analysis.
 #' @param end_date A Date object representing the end date for the analysis (currently not used in the function).
 #'
-#' @return Two data frames with the following data:
-#'     \item{metabolic body weights}
-#'     \item{delta body weights}
+#' @return A list containing two data frames:
+#'     \item{metabolic_bw}{Data frame containing metabolic body weights summary.}
+#'     \item{delta_bw}{Data frame containing delta body weights.}
 #'
 #' @examples
 #' @export process_bw
@@ -53,8 +53,6 @@ process_bw <- function(file, start_date, end_date) {
 
   names(metabolic_BW) <- c("Visible_ID", "mBW", "SD_mBW")
 
-  return(metabolic_BW)
-
 
   # Create a table with all dates in the study
   dates <- seq(as.Date(start_date), as.Date(end_date), by = "day")
@@ -81,7 +79,7 @@ process_bw <- function(file, start_date, end_date) {
 
   # Optionally plot for a specific Visible_ID (random)
   random_id <- sample(unique(data$Visible_ID), 1)
-  plot <- plot(y = data$BWhat[data$Visible_ID == random_id],
+  plot(y = data$BWhat[data$Visible_ID == random_id],
        x = data$Date[data$Visible_ID == random_id],
        main = paste("BWhat for Visible_ID:", random_id),
        xlab = "Date",
@@ -98,7 +96,7 @@ process_bw <- function(file, start_date, end_date) {
   # Rename columns
   names(delta_BW) <- c("Visible_ID", "deltaBW")
 
-  return(delta_BW)
-  return(plot)
+  # Return a list with two data frames: metabolic_bw and delta_bw
+  return(list(metabolic_bw = metabolic_bw, delta_bw = delta_bw))
 
 }
