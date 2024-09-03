@@ -17,9 +17,10 @@
 #' @examples
 #' @export process_bw
 #'
-#' @import dplyr,
-#'         purrr,
-#'         readxl
+#' @import dplyr
+#' @importFrom dplyr %>
+#' @import purrr
+#' @import readxl
 process_bw <- function(file, start_date, end_date) {
 
   Body_weights <- readxl::read_excel(file, sheet = "BW_BCS", col_types = c("text", "date", "numeric", "numeric"))

@@ -1,6 +1,6 @@
 Package: feedeffir
 Type: Package
-Title: Process Feed efficiency files
+Title: Process Feed Efficiency Files
 Version: 0.1.0
 Authors@R: 
   c(
@@ -19,6 +19,7 @@ RoxygenNote: 7.3.2
 Imports:
     dplyr,
     openxlsx,
+    purrr,
     readr,
     reshape2,
     readxl

@@ -17,8 +17,9 @@
 #' @examples
 #' @export calculate_milke
 #'
-#' @import dplyr,
-#'         readxl
+#' @import dplyr
+#' @importFrom dplyr %>
+#' @import readxl
 calculate_milke <- function(file1, file2, start_date, coeff1 = 9.29, coeff2 = 5.85, coeff3 = 3.95) {
 
   MilkWeights <- readxl::read_excel(file1)

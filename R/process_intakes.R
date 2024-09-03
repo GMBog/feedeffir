@@ -24,9 +24,10 @@
 #' @examples
 #' @export process_intakes
 #'
-#' @import dplyr,
-#'         readr,
-#'         readxl
+#' @import dplyr
+#' @importFrom dplyr %>
+#' @import readr
+#' @import readxl
 process_intakes <- function(file1, file2, rfid_tbl, start_date, end_date, iDM, pDM = 0.95) {
 
   Feed_Intakes <- readxl::read_excel(file1, col_types = c("text", "date", "text", "numeric"))
