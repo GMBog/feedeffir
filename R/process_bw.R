@@ -97,6 +97,6 @@ process_bw <- function(file, start_date, end_date) {
   names(delta_BW) <- c("Visible_ID", "deltaBW")
 
   # Return a list with two data frames: metabolic_bw and delta_bw
-  return(list(metabolic_bw = metabolic_bw, delta_bw = delta_bw))
+  return(list(metabolic_bw = metabolic_BW, delta_bw = delta_BW))
 
 }
