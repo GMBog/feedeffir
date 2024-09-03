@@ -25,11 +25,12 @@
 #' @export process_intakes
 #'
 #' @import dplyr
-#' @importFrom dplyr %>
+#' @importFrom dplyr %>%
 #' @import readr
 #' @import readxl
-process_intakes <- function(file1, file2, rfid_tbl, start_date, end_date, iDM, pDM = 0.95) {
+utils::globalVariables(c("DM", "PIntake_kg", "iDMI", "pDMI", "DMI_total"))
 
+process_intakes <- function(file1, file2, rfid_tbl, start_date, end_date, iDM, pDM = 0.95) {
   Feed_Intakes <- readxl::read_excel(file1, col_types = c("text", "date", "text", "numeric"))
   Pellet_Intakes <- readr::read_csv(file2, col_types = cols(FarmName = col_character(), RFID = col_character()))
 
@@ -42,33 +43,41 @@ process_intakes <- function(file1, file2, rfid_tbl, start_date, end_date, iDM, p
 
   # Calculate DMI for feed intakes
   Feed_Intakes <- Feed_Intakes %>%
-    dplyr::mutate(week = floor(as.numeric(difftime(as.Date(Date), start_date), units = "weeks")) + 1,
-                  DM = ifelse(week <= length(iDM), iDM[week], NA_real_),
-                  iDMI = ifelse(FedKg > 0, FedKg * DM, 0)) # Avoid negative intakes
+    dplyr::mutate(
+      week = floor(as.numeric(difftime(as.Date(Date), start_date), units = "weeks")) + 1,
+      DM = ifelse(week <= length(iDM), iDM[week], NA_real_),
+      iDMI = ifelse(FedKg > 0, FedKg * DM, 0)
+    ) # Avoid negative intakes
 
   head(Feed_Intakes)
   table(Feed_Intakes$Date, Feed_Intakes$week)
 
   # Calculate DMI for pellet intakes
   Pellet_Intakes <- Pellet_Intakes %>%
-    dplyr::mutate(DM = ifelse(!is.na(PIntake_kg), pDM, 0),
-                  pDMI = PIntake_kg * DM)
+    dplyr::mutate(
+      DM = ifelse(!is.na(PIntake_kg), pDM, 0),
+      pDMI = PIntake_kg * DM
+    )
 
   head(Pellet_Intakes)
 
   # Sum feed and pellet intakes
   Daily_intakes <- Feed_Intakes %>%
     dplyr::inner_join(Pellet_Intakes, by = c("Visible_ID" = "FarmName", "Date")) %>%
-    dplyr::mutate(DMI_total = iDMI + pDMI,
-                  DMI_total = ifelse(DMI_total == 0, NA, DMI_total))
+    dplyr::mutate(
+      DMI_total = iDMI + pDMI,
+      DMI_total = ifelse(DMI_total == 0, NA, DMI_total)
+    )
 
   # Generate weekly intakes for each cow
   Dry_matter_intakes <- Daily_intakes %>%
     dplyr::mutate(week = floor(as.numeric(difftime(as.Date(Date), start_date), units = "weeks")) + 1) %>%
     dplyr::group_by(Visible_ID, week) %>%
-    dplyr::summarise(n = n(),
-                     Avg_DMI = ifelse(all(is.na(DMI_total)), 0, mean(DMI_total, na.rm = TRUE))) %>%
-    dplyr::mutate(across(everything(), ~replace(., is.nan(.), NA)))
+    dplyr::summarise(
+      n = n(),
+      Avg_DMI = ifelse(all(is.na(DMI_total)), 0, mean(DMI_total, na.rm = TRUE))
+    ) %>%
+    dplyr::mutate(across(everything(), ~ replace(., is.nan(.), NA)))
 
   names(Dry_matter_intakes) <- c("Visible_ID", "week", "n", "DMI")
 

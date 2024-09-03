@@ -3,18 +3,15 @@
 \name{process_bw}
 \alias{process_bw}
 \title{Process Body Weights}
-\usage{
-process_bw(file, start_date, end_date)
-}
 \arguments{
 \item{file}{A string representing the path to the Excel file containing body weights. The file should have columns:
 'Visible_ID' (cow identifier), 'Date', 'BW_lbs' (body weight in pounds).}
 
+\item{rfid_tbl}{Data frame with rfid and experiment information}
+
 \item{start_date}{A Date object representing the start date for the analysis.}
 
 \item{end_date}{A Date object representing the end date for the analysis (currently not used in the function).}
-
-\item{rfid_tbl}{Data frame with rfid and experiment information}
 }
 \value{
 A list containing two data frames:

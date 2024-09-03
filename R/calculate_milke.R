@@ -18,28 +18,31 @@
 #' @export calculate_milke
 #'
 #' @import dplyr
-#' @importFrom dplyr %>
+#' @importFrom dplyr %>%
 #' @import readxl
-calculate_milke <- function(file1, file2, start_date, coeff1 = 9.29, coeff2 = 5.85, coeff3 = 3.95) {
+utils::globalVariables(c("MilkNum", "MilkLbs", "week", "FatLbs", "ProtLbs", "LactLbs", "FatKg", "ProtKg", "LactKg", "milkE"))
 
+calculate_milke <- function(file1, file2, start_date, coeff1 = 9.29, coeff2 = 5.85, coeff3 = 3.95) {
   MilkWeights <- readxl::read_excel(file1)
 
   MilkWeights$MilkLbs <- as.numeric(MilkWeights$MilkLbs)
 
   MilkWeights <- MilkWeights %>%
     dplyr::select(Visible_ID = Visible_ID, Date = Date, MilkNum, MilkLbs) %>%
-    dplyr::mutate(MilkLbs = ifelse(MilkLbs == 0, NA, MilkLbs),
-                  MilkKg = round(MilkLbs / 2.205, 2))
+    dplyr::mutate(
+      MilkLbs = ifelse(MilkLbs == 0, NA, MilkLbs),
+      MilkKg = round(MilkLbs / 2.205, 2)
+    )
 
   MilkWeights$Visible_ID <- as.character(MilkWeights$Visible_ID)
 
   MilkComposition <- read_excel(file2, col_types = c("text", "date", "text", "text", rep("numeric", 6)))
 
-  ##Join milk weights and composition
+  ## Join milk weights and composition
   Milk_energy <- MilkWeights %>%
-    dplyr::inner_join(MilkComposition[,2:10], by = c("MilkNum", "Date", "Visible_ID"))
+    dplyr::inner_join(MilkComposition[, 2:10], by = c("MilkNum", "Date", "Visible_ID"))
 
-  #Transform components in % to kg and lbs
+  # Transform components in % to kg and lbs
   Milk_energy$FatLbs <- Milk_energy$MilkLbs * (Milk_energy$FatPct / 100)
   Milk_energy$ProtLbs <- Milk_energy$MilkLbs * (Milk_energy$PrtPct / 100)
   Milk_energy$LactLbs <- Milk_energy$MilkLbs * (Milk_energy$LacPct / 100)
@@ -48,37 +51,37 @@ calculate_milke <- function(file1, file2, start_date, coeff1 = 9.29, coeff2 = 5.
   Milk_energy$ProtKg <- Milk_energy$MilkKg * (Milk_energy$PrtPct / 100)
   Milk_energy$LactKg <- Milk_energy$MilkKg * (Milk_energy$LacPct / 100)
 
-  ###Remove data before Experimental start date
+  ### Remove data before Experimental start date
   Milk_energy <- Milk_energy %>%
     dplyr::filter(Date >= start_date)
 
-  #Calculate daily milk components per cow
+  # Calculate daily milk components per cow
   Daily_milkE <- Milk_energy %>%
     dplyr::mutate(week = floor(as.numeric(difftime(as.Date(Date), start_date), units = "weeks")) + 1) %>%
     dplyr::group_by(Visible_ID, week, MilkNum) %>%
-
-    #Calculate components in kg
-    dplyr::summarise(MilkLbs = sum(MilkLbs),
-                     FatLbs = sum(FatLbs),
-                     ProtLbs = sum(ProtLbs),
-                     LactLbs = sum(LactLbs),
-
-                     FatKg = sum(FatKg),
-                     ProtKg = sum(ProtKg),
-                     LactKg = sum(LactKg)) %>%
-
-    #Calculate milk energy based on the following formula:
+    # Calculate components in kg
+    dplyr::summarise(
+      MilkLbs = sum(MilkLbs),
+      FatLbs = sum(FatLbs),
+      ProtLbs = sum(ProtLbs),
+      LactLbs = sum(LactLbs),
+      FatKg = sum(FatKg),
+      ProtKg = sum(ProtKg),
+      LactKg = sum(LactKg)
+    ) %>%
+    # Calculate milk energy based on the following formula:
     dplyr::mutate(milkE = (coeff1 * FatKg) + (coeff2 * ProtKg) + (coeff3 * LactKg)) %>%
-    #Do the average of milk energy per week
+    # Do the average of milk energy per week
     dplyr::group_by(Visible_ID, week) %>%
-    dplyr::summarise(n = n(),
-                     MilkLbs = mean(MilkLbs),
-                     FatLbs = mean(FatLbs),
-                     ProtLbs = mean(ProtLbs),
-                     LactLbs = mean(LactLbs),
-                     milkE = mean(milkE))
+    dplyr::summarise(
+      n = n(),
+      MilkLbs = mean(MilkLbs),
+      FatLbs = mean(FatLbs),
+      ProtLbs = mean(ProtLbs),
+      LactLbs = mean(LactLbs),
+      milkE = mean(milkE)
+    )
 
 
   return(Daily_milkE)
-
 }

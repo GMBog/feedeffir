@@ -18,8 +18,13 @@ LazyData: true
 RoxygenNote: 7.3.2
 Imports:
     dplyr,
+    ggplot2,
+    grDevices,
     openxlsx,
     purrr,
     readr,
     reshape2,
-    readxl
+    readxl,
+    stringr,
+    tidyr,
+    writexl

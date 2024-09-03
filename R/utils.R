@@ -10,7 +10,6 @@
 #' @export process_files
 #'
 #' @examples
-#'
 #' @import readxl
 #' @import utils
 #' @import dplyr
@@ -69,7 +68,6 @@ process_files <- function(Dir = NA, opt = 1) {
 #' @export
 #'
 #' @examples
-#'
 #' @import dplyr
 #' @import readr
 
@@ -118,13 +116,11 @@ process_AFI_files <- function(Dir) {
 #' @export
 #'
 #' @examples
-#'
 #' @import readxl
 #' @import reshape2
 #' @import readr
 
 transform_cols_in_rows <- function(file) {
-
   # Open file
   data <- readxl::read_excel(file, col_types = c("text", rep("numeric", 3)))
 

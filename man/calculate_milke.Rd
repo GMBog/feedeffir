@@ -3,16 +3,6 @@
 \name{calculate_milke}
 \alias{calculate_milke}
 \title{Calculate Milk Energy}
-\usage{
-calculate_milke(
-  file1,
-  file2,
-  start_date,
-  coeff1 = 9.29,
-  coeff2 = 5.85,
-  coeff3 = 3.95
-)
-}
 \arguments{
 \item{file1}{A string representing the path to the Excel file containing milk weights}
 

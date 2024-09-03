@@ -89,9 +89,9 @@ for (file in list) {
 rm(temp)
 
 data <- data %>%
-  dplyr::arrange(Visible_ID, Date) %>%  # Sort the data by Visible_ID and Date
-  dplyr::group_by(Visible_ID, Date) %>%  # Group by Visible_ID and Date
-  dplyr::slice_tail(n = 1) %>%           # Keep the last occurrence within each group
+  dplyr::arrange(Visible_ID, Date) %>% # Sort the data by Visible_ID and Date
+  dplyr::group_by(Visible_ID, Date) %>% # Group by Visible_ID and Date
+  dplyr::slice_tail(n = 1) %>% # Keep the last occurrence within each group
   dplyr::ungroup()
 
 # Save milk weights file in Excel or without format

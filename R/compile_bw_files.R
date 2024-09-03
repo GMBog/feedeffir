@@ -14,7 +14,6 @@
 #'
 #' @import openxlsx
 compile_bw_files <- function(Trial = NA, Dir = NA, opt = 1) {
-
   # Process files using the function for read.csv files
   data <- process_files(Dir, opt)
 

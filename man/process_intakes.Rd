@@ -3,9 +3,6 @@
 \name{process_intakes}
 \alias{process_intakes}
 \title{Process Feed and Pellet Intakes}
-\usage{
-process_intakes(file1, file2, rfid_tbl, start_date, end_date, iDM, pDM = 0.95)
-}
 \arguments{
 \item{file1}{A string representing the path to the Excel file containing feed intake data. The file should have columns:
 'Visible_ID' (cow identifier), 'Date' (date of intake), 'FedKg' (amount of feed in kilograms).}
