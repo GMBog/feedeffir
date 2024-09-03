@@ -12,8 +12,6 @@
 #' @export compile_milkcomp_files
 #'
 #' @import openxlsx
-
-
 compile_milkcomp_files <- function(Trial = NA, Dir = NA) {
   # List milk composition files in the directory
   file_list <- list.files(path = Dir, recursive = TRUE, full.names = TRUE)

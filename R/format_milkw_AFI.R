@@ -21,7 +21,6 @@
 #' @import dplyr
 #' @importFrom dplyr %>%
 #' @import readr
-
 utils::globalVariables(c("Visible_ID", "Date"))
 
 # Function to format milk weights from AFI system
