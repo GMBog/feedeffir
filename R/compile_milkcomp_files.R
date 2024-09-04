@@ -14,10 +14,9 @@
 #' @import openxlsx
 compile_milkcomp_files <- function(Trial = NA, Dir = NA) {
   # List milk composition files in the directory
-  file_list <- list.files(path = Dir, recursive = TRUE, full.names = TRUE)
 
   # Process files using the function to read csv files
-  data <- process_files(file_list)
+  data <- process_files(Dir)
 
   # Include names to the compiled milk composition file
   names(data) <- c("Sample", "Date", "Visible_ID", "MilkNum", "FatPct", "PrtPct", "LacPct", "SnF", "Urea", "Cells")
@@ -25,3 +24,4 @@ compile_milkcomp_files <- function(Trial = NA, Dir = NA) {
   # Save file
   openxlsx::write.xlsx(data, paste0("~/Downloads/UW_", Trial, "_MilkComposition", Sys.Date(), ".xlsx"))
 }
+
