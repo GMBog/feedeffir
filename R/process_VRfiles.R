@@ -1,4 +1,4 @@
-#' @name RIC2
+#' @name process_VRfiles
 #' @title Process VR files from RIC system
 #'
 #' @description Processes VR files from RIC system with feed intakes and
@@ -8,11 +8,10 @@
 #' @param VRfile VRfile with intakes
 #' @param bins Vector with the number of bins to be used. For example, 'seq(1,32)' or 'c(1,2,3,4,5,6, ..., 32)'
 #' @param output_dir The directory path where the output files should be saved.
-#' @param output_file_name The name of the compiled Excel file. For example, "Intakes_XXX".
 #'
 #' @return A plot with the Fed in Kg per animal and an Excel file with the intakes.
 #'
-#' @export RIC2
+#' @export process_VRfiles
 #'
 #' @import dplyr
 #' @importFrom dplyr %>%
@@ -25,7 +24,7 @@
 utils::globalVariables(c("TrialID", "X1", "X2", "X3", "X4", "X5", "X9", "X10", "Type", "Feed", "FedKg", "Date",
                          "TotalDiet", "Diet", "Percentage"))
 
-RIC2 <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir, output_file_name) {
+process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir) {
   # Read the intake file
   VR <- readr::read_csv(VRfile, col_names = FALSE, col_types = cols(X1 = col_character())) %>%
     dplyr::select(-12:-16) %>%
@@ -151,19 +150,7 @@ RIC2 <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir, output_file_na
     tidyr::pivot_wider(names_from = Diet, values_from = Percentage) %>%
     mutate_at(vars(-Visible_ID), ~ ifelse(. == 0, NA, .))
 
-  # Step 11: Compile daily intakes
-  list <- list.files(path = output_dir, recursive = TRUE, full.names = TRUE)
-  if (output_file_name %in% basename(list)) {
-    temp <- read_excel(paste0(output_dir, "/", output_file_name))
-  } else {
-    temp <- data.frame()
-  }
-
-  data <- bind_rows(temp, Final_data)
-  data <- data %>%
-    dplyr::distinct()
-
-  # Step 12: Create an Excel file with all tables
+  # Step 11: Create an Excel file with all tables
   writexl::write_xlsx(
     list(
       Raw_Data = Raw_data,
@@ -177,7 +164,7 @@ RIC2 <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir, output_file_na
       Diets_Fedcows = Diets_per_cow,
       Final_Data = Final_data
     ),
-    path = paste0(output_dir, "/", output_file_name, ".xlsx")
+    path = paste0(output_dir, "/Intakes_", Date, ".xlsx")
   )
 
   message("The VR file was processed and the result saved at ", output_dir)

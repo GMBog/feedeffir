@@ -39,7 +39,7 @@ feedeffir handles two main types of data:
 
 ### How to Use
 
-- To work with **raw data**, use functions like `RIC2()`,
+- To work with **raw data**, use functions like `process_VRfiles()`,
   `format_milkw_AFI()`, `compile_milkcomp_files()`, and
   `compile_bw_files()` to preprocess and create the initial datasets.
 - To analyze **compiled feed efficiency files**, use functions such as
