@@ -168,4 +168,6 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir) {
   )
 
   message("The VR file was processed and the result saved at ", output_dir)
+
+  return(Final_data)
 }
