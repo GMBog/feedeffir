@@ -41,8 +41,16 @@ feedeffir handles two main types of data:
 
 ### How to Use
 
-- To work with **raw data**, use functions like `process_VRfiles()`, `process_AFI_milkw()`, `compile_milkcomp_files()`, and `compile_bw_files()` to preprocess and create the initial datasets.
-- To analyze **compiled feed efficiency files**, use functions such as `process_intakes()`, `process_bw()`, and `calculate_milke()` which expect data compiled data.
+- To work with **raw data**, use functions to preprocess and create the initial datasets:
+* `process_VRfiles()`
+* `process_AFI_milkw()`
+* `compile_milkcomp_files()`
+* `compile_bw_files()`
+
+- To analyze **compiled feed efficiency files**, use functions which expect compiled data:
+* `process_intakes()`
+* `process_bw()`
+* `calculate_milke()` 
 
 For detailed examples of how to use these functions, refer to the [Examples](#examples) section.
 
@@ -52,5 +60,6 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(feedeffir)
+
 ```
 
