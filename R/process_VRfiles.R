@@ -21,8 +21,10 @@
 #' @import stringr
 #' @import tidyr
 #' @import writexl
-utils::globalVariables(c("TrialID", "X1", "X2", "X3", "X4", "X5", "X9", "X10", "Type", "Feed", "FedKg", "Date",
-                         "TotalDiet", "Diet", "Percentage"))
+utils::globalVariables(c(
+  "TrialID", "X1", "X2", "X3", "X4", "X5", "X9", "X10", "Type", "Feed", "FedKg", "Date",
+  "TotalDiet", "Diet", "Percentage"
+))
 
 process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir) {
   # Read the intake file
@@ -127,12 +129,12 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir) {
     ggplot2::geom_col(width = 0.3) +
     ggplot2::theme_grey() +
     ggplot2::theme(
-        axis.text.x = ggplot2::element_text(angle = 45, hjust = 1.05, size = 8, family = "Times New Roman"),
-        axis.text.y = ggplot2::element_text(hjust = 1.05, size = 8, family = "Times New Roman"),
-        axis.title.x = ggplot2::element_text(size = 12, family = "Times New Roman", face = "bold"),
-        axis.title.y = ggplot2::element_text(size = 12, family = "Times New Roman", face = "bold"),
-        legend.position = "right"
-      ) +
+      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1.05, size = 8, family = "Times New Roman"),
+      axis.text.y = ggplot2::element_text(hjust = 1.05, size = 8, family = "Times New Roman"),
+      axis.title.x = ggplot2::element_text(size = 12, family = "Times New Roman", face = "bold"),
+      axis.title.y = ggplot2::element_text(size = 12, family = "Times New Roman", face = "bold"),
+      legend.position = "right"
+    ) +
     ggplot2::labs(title = "", x = "Visible ID", y = "Fed (Kg)")
 
   print(plot)

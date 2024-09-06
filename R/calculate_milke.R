@@ -5,12 +5,12 @@
 #' This function processes milk weights and composition data to calculate individual milk energy.
 #' The calculation uses coefficients for fat, protein, and lactose to estimate milk energy.
 #'
-#' @param file1 A string representing the path to the Excel file containing milk weights
-#' @param file2 A string representing the path to the Excel file containing milk composition
-#' @param start_date A Date object representing the start date for the analysis
-#' @param coeff1 A numeric value representing the coefficient for fat (default is 9.29)
-#' @param coeff2 A numeric value representing the coefficient for protein (default is 5.85)
-#' @param coeff3 A numeric value representing the coefficient for lactose (default is 3.95)
+#' @param file1 a character string representing the path to the Excel file containing milk weights
+#' @param file2 a character string representing the path to the Excel file containing milk composition
+#' @param start_date a character string representing the start date for the analysis (format 'mm/dd/yyyy')
+#' @param coeff1 a numeric value representing the coefficient for fat (default is 9.29)
+#' @param coeff2 a numeric value representing the coefficient for protein (default is 5.85)
+#' @param coeff3 a numeric value representing the coefficient for lactose (default is 3.95)
 #'
 #' @return A data frame with daily milk energy
 #'
@@ -22,7 +22,8 @@
 #' @import readxl
 utils::globalVariables(c("MilkNum", "MilkLbs", "week", "FatLbs", "ProtLbs", "LactLbs", "FatKg", "ProtKg", "LactKg", "milkE"))
 
-calculate_milke <- function(file1, file2, start_date, coeff1 = 9.29, coeff2 = 5.85, coeff3 = 3.95) {
+calculate_milke <- function(file1, file2, start_date,
+                            coeff1 = 9.29, coeff2 = 5.85, coeff3 = 3.95) {
   MilkWeights <- readxl::read_excel(file1)
 
   MilkWeights$MilkLbs <- as.numeric(MilkWeights$MilkLbs)

@@ -1,24 +1,23 @@
-#' @title process_files
 #' @name process_files
-#' @description Process csv, excel, or no extension files with specific format
+#' @title Process Files
+#'
+#' @description Process CSV, Excel, or no extension files with specific format
 #'    for milk composition and body weights files
 #'
-#' @param Dir A directory containing the file paths of the CSV, Excel, or no extension files to be processed.
-#' @param opt Option to process Excel files from Rosy Lane (opt = 2)
+#' @param dir a character string representing the directory containing the file paths of the CSV, Excel, or no extension files to be processed
+#' @param opt an integer representing the option to process Excel files from Rosy Lane (opt = 2)
 #'
 #' @return A data frame containing the combined data from all processed files.
-#' @export process_files
-#'
 #' @examples
-#' @import readxl
-#' @import utils
+#' @export process_files
 #' @import dplyr
-#' @import reshape2
 #' @import readr
-
-process_files <- function(Dir = NA, opt = 1) {
+#' @import readxl
+#' @import reshape2
+#' @import utils
+process_files <- function(dir = NA, opt = 1) {
   # List all files in the directory
-  file_list <- list.files(Dir, full.names = TRUE)
+  file_list <- list.files(dir, full.names = TRUE)
   print(file_list)
 
   data <- data.frame() # Initialize an empty data frame
@@ -57,69 +56,21 @@ process_files <- function(Dir = NA, opt = 1) {
   return(data)
 }
 
-
-#' @title process_AFI_files
-#' @name process_AFI_files
-#' @description Process files from AFI system with milk weights
-#'
-#' @param Dir Directory with AFI files
-#'
-#' @return A table with all animals with milk weights
-#' @export
-#'
-#' @examples
-#' @import dplyr
-#' @import readr
-
-process_AFI_files <- function(Dir) {
-  # List AFI files in the directory
-  file_list <- list.files(path = Dir, recursive = FALSE, full.names = TRUE)
-  print(file_list)
-
-  data <- data.frame() # Initialize an empty data frame
-
-  for (file in file_list) {
-    # Extract animal ID from file name
-    ID <- sub("^([0-9]+) - .*", "\\1", basename(file))
-
-    # Read the file
-    temp <- readr::read_table(file, col_types = readr::cols(
-      Days = readr::col_skip(), Milk = readr::col_number(),
-      Cond. = readr::col_skip(), AMT = readr::col_skip(),
-      X6 = readr::col_skip()
-    ))
-
-    # Add animal ID column
-    temp$Visible_ID <- ID
-    temp <- temp[, c("Visible_ID", names(temp)[-which(names(temp) == "Visible_ID")])]
-
-    # Combine dataframes
-    if (nrow(temp) == 0) {
-      data <- temp
-    } else {
-      data <- dplyr::bind_rows(data, temp)
-    }
-  }
-
-  return(data)
-}
-
-
-
-#' @title transform_cols_in_rows
 #' @name transform_cols_in_rows
-#' @description Transpose a table using animal ID as reference
+#' @title Transform Columns in Rows
 #'
-#' @param file Excel file to transpose
+#' @description Transpose a table using animal ID as reference.
+#'     It is useful when working with raw body weights.
+#'
+#' @param file a character string representing an Excel to transpose
 #'
 #' @return A file with transposed data to compile
+#' @examples
 #' @export
 #'
-#' @examples
+#' @import readr
 #' @import readxl
 #' @import reshape2
-#' @import readr
-
 transform_cols_in_rows <- function(file) {
   # Open file
   data <- readxl::read_excel(file, col_types = c("text", rep("numeric", 3)))

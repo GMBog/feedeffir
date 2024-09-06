@@ -2,19 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{process_files}
 \alias{process_files}
-\title{process_files}
+\title{Process Files}
 \usage{
-process_files(Dir = NA, opt = 1)
+process_files(dir = NA, opt = 1)
 }
 \arguments{
-\item{Dir}{A directory containing the file paths of the CSV, Excel, or no extension files to be processed.}
+\item{dir}{a character string representing the directory containing the file paths of the CSV, Excel, or no extension files to be processed}
 
-\item{opt}{Option to process Excel files from Rosy Lane (opt = 2)}
+\item{opt}{an integer representing the option to process Excel files from Rosy Lane (opt = 2)}
 }
 \value{
 A data frame containing the combined data from all processed files.
 }
 \description{
-Process csv, excel, or no extension files with specific format
+Process CSV, Excel, or no extension files with specific format
    for milk composition and body weights files
 }

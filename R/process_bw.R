@@ -4,11 +4,11 @@
 #' @description Process body weights files, and compute metabolic body weights and
 #'     delta body weights using a linear model prediction for the entire period.
 #'
-#' @param file A string representing the path to the Excel file containing body weights. The file should have columns:
+#' @param file a character string representing the path to the Excel file containing body weights. The file should have columns:
 #'     'Visible_ID' (cow identifier), 'Date', 'BW_lbs' (body weight in pounds).
-#' @param rfid_tbl Data frame with rfid and experiment information
-#' @param start_date A Date object representing the start date for the analysis.
-#' @param end_date A Date object representing the end date for the analysis (currently not used in the function).
+#' @param rfid_tbl a data frame with rfid and experiment information
+#' @param start_date a character string representing the start date for the analysis (format 'mm/dd/yyyy')
+#' @param end_date a character string representing the end date for the analysis (format 'mm/dd/yyyy')
 #'
 #' @return A list containing two data frames:
 #'     \item{metabolic_bw}{Data frame containing metabolic body weights summary.}

@@ -2,16 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{transform_cols_in_rows}
 \alias{transform_cols_in_rows}
-\title{transform_cols_in_rows}
+\title{Transform Columns in Rows}
 \usage{
 transform_cols_in_rows(file)
 }
 \arguments{
-\item{file}{Excel file to transpose}
+\item{file}{a character string representing an Excel to transpose}
 }
 \value{
 A file with transposed data to compile
 }
 \description{
-Transpose a table using animal ID as reference
+Transpose a table using animal ID as reference.
+    It is useful when working with raw body weights.
 }
