@@ -39,24 +39,19 @@ feedeffir handles two main types of data:
 
 ### How to Use
 
-- To work with **raw data**, use functions to preprocess and create the
-  initial datasets:
+To work with **raw data**, use functions to preprocess and create the
+initial data sets:
 
 - `process_VRfiles()`
-
 - `process_AFI_milkw()`
-
 - `compile_milkcomp_files()`
-
 - `compile_bw_files()`
 
-- To analyze **compiled feed efficiency files**, use functions which
-  expect compiled data:
+To analyze **compiled feed efficiency files**, use functions which
+expect compiled data:
 
 - `process_intakes()`
-
 - `process_bw()`
-
 - `calculate_milke()`
 
 For detailed examples of how to use these functions, refer to the
