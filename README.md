@@ -46,7 +46,7 @@ initial data sets:
 - `process_DC_milkw()`
 - `process_AFI_milkw()`
 
-To compile data, use compilers:
+To compile data, use the compilers:
 
 - `compile_bw_files()`
 - `compile_milkw_files()`
@@ -68,4 +68,59 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(feedeffir)
+
+# Process VR files with intakes
+file_path <- system.file("extdata", "VR240724.DAT", package = "feedeffir")
+
+data <- process_VRfiles(exp = "Study1", 
+                VRfile = file_path, 
+                bins = seq(1,32), 
+                output_dir = tempdir())
+#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//Rtmpitk1n8
+```
+
+<img src="man/figures/README-example-1.png" width="100%" />
+
+``` r
+
+head(data)
+#> # A tibble: 6 × 6
+#>   TrialID Date       Visible_ID Feed  FedKg Obs  
+#>   <chr>   <date>          <dbl> <chr> <dbl> <lgl>
+#> 1 Study1  2024-07-24       1009 TMR01  54.1 NA   
+#> 2 Study1  2024-07-24       1023 TMR01  50.2 NA   
+#> 3 Study1  2024-07-24       1035 TMR01  46.2 NA   
+#> 4 Study1  2024-07-24       1281 TMR01  61.7 NA   
+#> 5 Study1  2024-07-24       1291 TMR01  64.5 NA   
+#> 6 Study1  2024-07-24       1334 TMR01  59.7 NA
+
+# The next step is to compile the processed VR files
+#compile_VRfiles(dir = "~/Downloads/files/",
+#                compfile = "UW_Study1_CompiledIntakes.xlsx",
+#                data = data)
+
+
+
+# Process milk weights from Dairy Comp
+exp <- "Study1"
+file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
+data <- process_DC_milkw(exp, file_path)
+#> Number of cows in file: 64
+#> Time range:
+#> 2024-09-08
+#> 2024-09-07
+#> 2024-09-06
+#> 2024-09-05
+#> 2024-09-04
+#> 2024-09-03
+#> 2024-09-02
+
+head(data)
+#>   Trial_ID       Date MilkNum Visible_ID MilkLbs
+#> 1   Study1 2024-09-08      PM       1001      66
+#> 2   Study1 2024-09-08      PM       1068      53
+#> 3   Study1 2024-09-08      PM       1069      51
+#> 4   Study1 2024-09-08      PM       1074      57
+#> 5   Study1 2024-09-08      PM       1092      49
+#> 6   Study1 2024-09-08      PM       1097      44
 ```

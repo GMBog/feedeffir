@@ -39,7 +39,7 @@ process_DC_milkw <- function(exp = NA, file_path, late = 1){
 
   # 3. Transform Y# as Date, AM_PM in numbers (PM=1 and AM=2), and add the trialID
   date_sequence <- seq(Sys.Date() - late, by = "-1 day", length.out = 7)
-  message("Time range: ", print(date_sequence))
+  message("Time range:\n", paste(date_sequence, collapse = "\n"))
 
   data <- data %>%
     separate(variable, into = c("Y", "AM_PM"), sep = "(?<=Y[1-7])(?=AM|PM)", remove = FALSE) %>%

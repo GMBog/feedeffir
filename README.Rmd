@@ -47,7 +47,7 @@ To work with **raw data**, use functions to preprocess and create the initial da
 * `process_DC_milkw()`
 * `process_AFI_milkw()`
 
-To compile data, use compilers:
+To compile data, use the compilers:
 
 * `compile_bw_files()`
 * `compile_milkw_files()`
@@ -68,6 +68,30 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(feedeffir)
+
+# Process VR files with intakes
+file_path <- system.file("extdata", "VR240724.DAT", package = "feedeffir")
+
+data <- process_VRfiles(exp = "Study1", 
+                VRfile = file_path, 
+                bins = seq(1,32), 
+                output_dir = tempdir())
+
+head(data)
+
+# The next step is to compile the processed VR files
+#compile_VRfiles(dir = "~/Downloads/files/",
+#                compfile = "UW_Study1_CompiledIntakes.xlsx",
+#                data = data)
+
+
+
+# Process milk weights from Dairy Comp
+exp <- "Study1"
+file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
+data <- process_DC_milkw(exp, file_path)
+
+head(data)
 
 ```
 
