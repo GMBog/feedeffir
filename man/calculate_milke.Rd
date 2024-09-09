@@ -4,17 +4,17 @@
 \alias{calculate_milke}
 \title{Calculate Milk Energy}
 \arguments{
-\item{file1}{A string representing the path to the Excel file containing milk weights}
+\item{file1}{a character string representing the path to the Excel file containing milk weights}
 
-\item{file2}{A string representing the path to the Excel file containing milk composition}
+\item{file2}{a character string representing the path to the Excel file containing milk composition}
 
-\item{start_date}{A Date object representing the start date for the analysis}
+\item{start_date}{a character string representing the start date for the analysis (format 'mm/dd/yyyy')}
 
-\item{coeff1}{A numeric value representing the coefficient for fat (default is 9.29)}
+\item{coeff1}{a numeric value representing the coefficient for fat (default is 9.29)}
 
-\item{coeff2}{A numeric value representing the coefficient for protein (default is 5.85)}
+\item{coeff2}{a numeric value representing the coefficient for protein (default is 5.85)}
 
-\item{coeff3}{A numeric value representing the coefficient for lactose (default is 3.95)}
+\item{coeff3}{a numeric value representing the coefficient for lactose (default is 3.95)}
 }
 \value{
 A data frame with daily milk energy

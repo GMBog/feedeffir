@@ -12,7 +12,6 @@
 #' @examples
 #' @export process_AFI_milkw
 #'
-#' @import readr
 #' @import dplyr
 #' @importFrom dplyr %>%
 #' @import readr

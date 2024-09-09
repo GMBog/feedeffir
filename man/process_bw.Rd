@@ -4,14 +4,14 @@
 \alias{process_bw}
 \title{Process Body Weights}
 \arguments{
-\item{file}{A string representing the path to the Excel file containing body weights. The file should have columns:
+\item{file}{a character string representing the path to the Excel file containing body weights. The file should have columns:
 'Visible_ID' (cow identifier), 'Date', 'BW_lbs' (body weight in pounds).}
 
-\item{rfid_tbl}{Data frame with rfid and experiment information}
+\item{rfid_tbl}{a data frame with rfid and experiment information}
 
-\item{start_date}{A Date object representing the start date for the analysis.}
+\item{start_date}{a character string representing the start date for the analysis (format 'mm/dd/yyyy')}
 
-\item{end_date}{A Date object representing the end date for the analysis (currently not used in the function).}
+\item{end_date}{a character string representing the end date for the analysis (format 'mm/dd/yyyy')}
 }
 \value{
 A list containing two data frames:

@@ -4,21 +4,21 @@
 \alias{process_intakes}
 \title{Process Feed and Pellet Intakes}
 \arguments{
-\item{file1}{A string representing the path to the Excel file containing feed intake data. The file should have columns:
-'Visible_ID' (cow identifier), 'Date' (date of intake), 'FedKg' (amount of feed in kilograms).}
+\item{file1}{a character string representing the path to the Excel file containing feed intake data. The file should have columns:
+'Visible_ID' (cow identifier), 'Date' (date of intake), 'FedKg' (amount of feed in kilograms)}
 
-\item{file2}{A string representing the path to the CSV file containing pellet intake data. The file should have columns:
-'FarmName' (cow identifier), 'Date' (date of intake), 'PIntake_kg' (amount of pellets in kilograms).}
+\item{file2}{a character string representing the path to the CSV file containing pellet intake data. The file should have columns:
+'FarmName' (cow identifier), 'Date' (date of intake), 'PIntake_kg' (amount of pellets in kilograms)}
 
-\item{rfid_tbl}{Data frame with rfid and experiment information}
+\item{rfid_tbl}{a data frame with rfid and experiment information}
 
-\item{start_date}{A Date object representing the start date for the analysis.}
+\item{start_date}{a date object representing the start date for the analysis (format 'mm/dd/yyyy')}
 
-\item{end_date}{A Date object representing the end date for the analysis (currently not used in the function).}
+\item{end_date}{a date object representing the end date for the analysis (format 'mm/dd/yyyy')}
 
-\item{iDM}{A numeric vector representing the dry matter percentage for each week of the study. This should be as long as the number of weeks in the study.}
+\item{iDM}{a numeric vector representing the dry matter percentage for each week of the study. This should be as long as the number of weeks in the study.}
 
-\item{pDM}{A numeric value representing the dry matter percentage of the pellet intake (default is 0.95).}
+\item{pDM}{a numeric value representing the dry matter percentage of the pellet intake (default is 0.95)}
 }
 \value{
 A data frame with the following columns:
