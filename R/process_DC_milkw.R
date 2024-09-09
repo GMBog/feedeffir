@@ -57,4 +57,6 @@ process_DC_milkw <- function(exp = NA, file_path, late = 1){
   file_path <- paste0("~/Downloads/", exp, "_MilkWeights", lubridate::month(max(data$Date)), lubridate::day(max(data$Date)), "to", lubridate::month(min(data$Date)), lubridate::day(min(data$Date)))
   write.table(data, file = file_path, row.names = F)
 
+  return(data)
+
 }

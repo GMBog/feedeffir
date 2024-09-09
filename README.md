@@ -43,15 +43,20 @@ To work with **raw data**, use functions to preprocess and create the
 initial data sets:
 
 - `process_VRfiles()`
+- `process_DC_milkw()`
 - `process_AFI_milkw()`
-- `compile_milkcomp_files()`
+
+To compile data, use compilers:
+
 - `compile_bw_files()`
+- `compile_milkw_files()`
+- `compile_milkcomp_files()`
 
 To analyze **compiled feed efficiency files**, use functions which
 expect compiled data:
 
-- `process_intakes()`
 - `process_bw()`
+- `process_intakes()`
 - `calculate_milke()`
 
 For detailed examples of how to use these functions, refer to the

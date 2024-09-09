@@ -35,6 +35,58 @@ compile_milkcomp_files <- function(exp = NA, dir) {
 }
 
 
+#' @name compile_milkw_files
+#' @title Compile Milk Weights Files
+#'
+#' @description `compile_milkw_files()` compiles and formats milk weight files
+#'
+#' @param exp a character string representing the name of the experiment
+#' @param dir a character string representing the directory with milk composition files in Excel format
+#'
+#' @return An Excel file with the compiled milk weights data
+#'
+#' @examples
+#' @export compile_milkw_files
+#'
+#' @import openxlsx
+compile_milkw_files <- function(exp = NA, dir) {
+  ## Initialize an empty data frame to store the merged data
+  data <- data.frame()
+
+  ## List files in the directory
+  list <- list.files(path = dir, recursive = T, full.names = T)
+  print(list)
+
+  ### Read files in a loop
+  for (file in list) {
+    temp <- read.csv(file, sep = "") # Give the option to open excel files!!!
+
+    if (nrow(temp) == 0) {
+      data <- temp
+    } else {
+      data <- bind_rows(data, temp)
+    }
+  }
+  rm(temp)
+
+  # Remove duplicates dates and ids based on the way we pull down data from DairyComp
+  data <- data %>%
+    dplyr::distinct()
+
+  data$MilkLbs[data$MilkLbs == 0] <- NA
+
+  data <- data %>%
+    dplyr::group_by(Visible_ID) %>%
+    dplyr::mutate(MilkLbs1 = ifelse(MilkLbs %in% boxplot.stats(MilkLbs)$out, NA, MilkLbs)) %>%
+    dplyr::ungroup()
+
+  # Save file
+  openxlsx::write.xlsx(data, paste0("~/Downloads/UW_", exp, "_MilkWeights", Sys.Date(), ".xlsx"))
+
+}
+
+
+
 #' @name compile_bw_files
 #' @title Compile Body Weights Files
 #'
