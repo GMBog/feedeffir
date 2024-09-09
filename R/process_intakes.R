@@ -36,7 +36,7 @@ process_intakes <- function(file1, file2, rfid_tbl, start_date, end_date, iDM, p
 
   # Add treatment levels present in RFID file
   Feed_Intakes <- Feed_Intakes %>%
-    dplyr::inner_join(rfid_tbl[c(1, 5)], by = c("Visible_ID" = "FarmName")) %>%
+    dplyr::inner_join(rfid_tbl, by = c("Visible_ID" = "FarmName")) %>%
     # Filter out cows with records before the start_date
     dplyr::filter(Date >= start_date) %>%
     dplyr::distinct()
