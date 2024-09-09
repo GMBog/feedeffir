@@ -49,8 +49,8 @@ process_intakes <- function(file1, file2, rfid_tbl, start_date, end_date, iDM, p
       iDMI = ifelse(FedKg > 0, FedKg * DM, 0)
     ) # Avoid negative intakes
 
-  head(Feed_Intakes)
-  table(Feed_Intakes$Date, Feed_Intakes$week)
+  print(head(Feed_Intakes))
+  print(table(Feed_Intakes$Date, Feed_Intakes$week))
 
   # Calculate DMI for pellet intakes
   Pellet_Intakes <- Pellet_Intakes %>%

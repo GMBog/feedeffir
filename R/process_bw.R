@@ -39,8 +39,8 @@ process_bw <- function(file, start_date, end_date) {
   ## Transform body weights in kg and then calculate metabolic BW (mBW) with BW in kg
   data$mBW <- (data$BW_lbs / 2.205)^0.75
 
-  head(data)
-  table(data$Date, data$week)
+  print(head(data))
+  print(table(data$Date, data$week))
 
   ## Calculate the average and SD of the mBW per cow
   metabolic_BW <- data %>%
