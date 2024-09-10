@@ -72,15 +72,17 @@ library(feedeffir)
 # Process VR files with intakes
 file_path <- system.file("extdata", "VR240724.DAT", package = "feedeffir")
 
-data <- process_VRfiles(exp = "Study1", 
-                VRfile = file_path, 
-                bins = seq(1,32), 
-                output_dir = tempdir())
+data <- process_VRfiles(
+  exp = "Study1",
+  VRfile = file_path,
+  bins = seq(1, 32),
+  output_dir = tempdir()
+)
 
 head(data)
 
 # The next step is to compile the processed VR files
-#compile_VRfiles(dir = "~/Downloads/files/",
+# compile_VRfiles(dir = "~/Downloads/files/",
 #                compfile = "UW_Study1_CompiledIntakes.xlsx",
 #                data = data)
 
@@ -89,9 +91,9 @@ head(data)
 # Process milk weights from Dairy Comp
 exp <- "Study1"
 file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
-data <- process_DC_milkw(exp, file_path)
+output_dir <- tempdir()
+data <- process_DC_milkw(exp, file_path, output_dir)
 
 head(data)
-
 ```
 

@@ -82,7 +82,6 @@ compile_milkw_files <- function(exp = NA, dir) {
 
   # Save file
   openxlsx::write.xlsx(data, paste0("~/Downloads/UW_", exp, "_MilkWeights", Sys.Date(), ".xlsx"))
-
 }
 
 

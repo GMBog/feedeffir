@@ -8,11 +8,32 @@
 
 \item{file_path}{a character string representing the file path to Excel or CSV file downloaded from DC}
 
+\item{output_dir}{a character string representing the directory path where the output files should be saved}
+
 \item{late}{a numeric value representing the number of days late. By default 1}
+
+\item{rm.out}{A logical flag (default FALSE). If TRUE, outliers based on the standard deviation of milk weights are removed.}
 }
 \value{
-A table with the milk weights from Dairy Comp system
+Dataset and a table with milk weights from Dairy Comp system
 }
 \description{
 Compiles and formats milk weight files from Dairy Comp system.
+    It supports CSV and Excel files, transposes the data, and calculates the appropriate date range for each row.
+    Allows filtering of outliers based on milk weight values and saves the formatted milk weights to a file.
+}
+\examples{
+# How to process the milk weights from DC?
+# First pull down the milk weights from DC, and save as an Excel file
+
+file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
+
+# Next use the following function:
+data <- process_DC_milkw(exp = "Test",
+                         file_path = file_path,
+                         output_dir = getwd(),
+                         rm.out = FALSE)
+
+on.exit(unlink(output_dir, recursive = TRUE))
+
 }
