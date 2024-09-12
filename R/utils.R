@@ -35,7 +35,7 @@ process_files <- function(dir = NA, opt = 1) {
         temp <- readxl::read_excel(file, col_types = c("text", "text", "numeric"))
       } else {
         # Process Excel files (default format)
-        temp <- readxl::read_excel(file, col_types = c("numeric", "date", "text", rep("numeric", 7)))
+        temp <- readxl::read_excel(file, col_types = c("numeric", "date", "numeric", "text", rep("numeric", 6)))
       }
     } else if (ext == "") {
       # Process files with no extension (assume space-separated)

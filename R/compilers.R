@@ -15,7 +15,7 @@
 #' @import openxlsx
 compile_milkcomp_files <- function(exp = NA, dir, output_dir) {
   # Process files using the function to read csv files
-  data <- process_files(dir, opt = 2)
+  data <- process_files(dir)
 
   # Include names to the compiled milk composition file
   names(data) <- c(
