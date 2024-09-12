@@ -16,15 +16,13 @@
 #' # How to process the milk weights from DC?
 #' # First pull down the milk weights from DC, and save as an Excel file
 #'
-#' file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
-#'
 #' # Next use the following function:
-#' data <- process_DC_milkw(exp = "Test",
-#'                          file_path = file_path,
-#'                          output_dir = getwd(),
-#'                          rm.out = FALSE)
-#'
-#' on.exit(unlink(output_dir, recursive = TRUE))
+#' data <- process_DC_milkw(
+#'   exp = "Test",
+#'   file_path = system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir"),
+#'   output_dir = getwd(),
+#'   rm.out = FALSE
+#' )
 #'
 #' @export process_DC_milkw
 #'
@@ -74,12 +72,12 @@ process_DC_milkw <- function(exp = NA, file_path, output_dir, late = 1, rm.out =
     mean_value <- mean(data$MilkLbs, na.rm = TRUE)
     sd_value <- stats::sd(data$MilkLbs, na.rm = TRUE)
 
-    initial_count <- nrow(data)  # Number of rows before filtering
+    initial_count <- nrow(data) # Number of rows before filtering
 
     data <- data %>%
       dplyr::filter(MilkLbs >= mean_value - 3 * sd_value & MilkLbs <= mean_value + 3 * sd_value)
 
-    final_count <- nrow(data)  # Number of rows after filtering
+    final_count <- nrow(data) # Number of rows after filtering
 
     message("Number of outlier records removed: ", initial_count - final_count)
   }
@@ -88,11 +86,13 @@ process_DC_milkw <- function(exp = NA, file_path, output_dir, late = 1, rm.out =
   print(summary(data$MilkLbs))
 
   # 6. Save milk weights file in Excel or without format
-  file_path <- paste0(output_dir, exp, "_MilkWeights",
-                      lubridate::month(max(data$Date)),
-                      lubridate::day(max(data$Date)), "to",
-                      lubridate::month(min(data$Date)),
-                      lubridate::day(min(data$Date)))
+  file_path <- paste0(
+    output_dir, exp, "_MilkWeights",
+    lubridate::month(max(data$Date)),
+    lubridate::day(max(data$Date)), "to",
+    lubridate::month(min(data$Date)),
+    lubridate::day(min(data$Date))
+  )
   write.table(data, file = file_path, row.names = F)
 
   return(data)

@@ -4,12 +4,14 @@
 \alias{compile_milkw_files}
 \title{Compile Milk Weights Files}
 \usage{
-compile_milkw_files(exp = NA, dir)
+compile_milkw_files(exp = NA, dir, output_dir)
 }
 \arguments{
 \item{exp}{a character string representing the name of the experiment}
 
 \item{dir}{a character string representing the directory with milk composition files in Excel format}
+
+\item{output_dir}{a character string representing the output directory}
 }
 \value{
 An Excel file with the compiled milk weights data

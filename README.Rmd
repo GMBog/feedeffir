@@ -32,12 +32,12 @@ pak::pak("GMBog/feedeffir")
 feedeffir handles two main types of data:
 
 1. **Raw Data**: 
-   - **Description**: This includes unprocessed datasets directly from the farm. Examples are raw milk weights from AFI system, feed intake files from RIC, and milk composition files.
-   - **Usage**: Functions that operate on raw data are designed for in-depth analysis, including data preprocessing and compilation.
+   - **Description**: This includes unprocessed datasets directly from the farm. Examples are raw milk weights from DC and AFI system, feed intake files from RIC2 Discover system, and milk composition files.
+   - **Usage**: Functions that operate on raw data are designed for pre-processing and compilation.
 
-2. **Compiled Feed Efficiency Files**:
-   - **Description**: These datasets are compiled from raw data and include metrics such as milk weights, milk composition, and feed intakes.
-   - **Usage**: Functions targeting compiled files focus on analyzing feed efficiency and related metrics. These functions typically require data that has already been processed and aggregated from raw inputs.
+2. **Compiled Feed Efficiency Data**:
+   - **Description**: This includes compiled datasets from raw data and include metrics such as milk weights, milk composition, and feed intakes.
+   - **Usage**: Functions targeting compiled files focus on analyzing feed efficiency traits. They require data that has already been processed from raw inputs.
 
 ### How to Use
 

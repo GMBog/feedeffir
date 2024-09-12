@@ -26,14 +26,12 @@ Compiles and formats milk weight files from Dairy Comp system.
 # How to process the milk weights from DC?
 # First pull down the milk weights from DC, and save as an Excel file
 
-file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
-
 # Next use the following function:
-data <- process_DC_milkw(exp = "Test",
-                         file_path = file_path,
-                         output_dir = getwd(),
-                         rm.out = FALSE)
-
-on.exit(unlink(output_dir, recursive = TRUE))
+data <- process_DC_milkw(
+  exp = "Test",
+  file_path = system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir"),
+  output_dir = getwd(),
+  rm.out = FALSE
+)
 
 }

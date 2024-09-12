@@ -24,18 +24,18 @@ feedeffir handles two main types of data:
 
 1.  **Raw Data**:
     - **Description**: This includes unprocessed datasets directly from
-      the farm. Examples are raw milk weights from AFI system, feed
-      intake files from RIC, and milk composition files.
+      the farm. Examples are raw milk weights from DC and AFI system,
+      feed intake files from RIC2 Discover system, and milk composition
+      files.
     - **Usage**: Functions that operate on raw data are designed for
-      in-depth analysis, including data preprocessing and compilation.
-2.  **Compiled Feed Efficiency Files**:
-    - **Description**: These datasets are compiled from raw data and
+      pre-processing and compilation.
+2.  **Compiled Feed Efficiency Data**:
+    - **Description**: This includes compiled datasets from raw data and
       include metrics such as milk weights, milk composition, and feed
       intakes.
     - **Usage**: Functions targeting compiled files focus on analyzing
-      feed efficiency and related metrics. These functions typically
-      require data that has already been processed and aggregated from
-      raw inputs.
+      feed efficiency traits. They require data that has already been
+      processed from raw inputs.
 
 ### How to Use
 
@@ -78,7 +78,7 @@ data <- process_VRfiles(
   bins = seq(1, 32),
   output_dir = tempdir()
 )
-#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmpPoeAbP
+#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmpwEzsxV
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -110,22 +110,22 @@ output_dir <- tempdir()
 data <- process_DC_milkw(exp, file_path, output_dir)
 #> Number of cows in file: 64
 #> Time range:
+#> 2024-09-11
+#> 2024-09-10
 #> 2024-09-09
 #> 2024-09-08
 #> 2024-09-07
 #> 2024-09-06
 #> 2024-09-05
-#> 2024-09-04
-#> 2024-09-03
 #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #>    0.00   45.00   53.00   52.88   62.00   89.00
 
 head(data)
 #>   Trial_ID       Date MilkNum Visible_ID MilkLbs
-#> 1   Study1 2024-09-09      PM       1001      66
-#> 2   Study1 2024-09-09      PM       1068      53
-#> 3   Study1 2024-09-09      PM       1069      51
-#> 4   Study1 2024-09-09      PM       1074      57
-#> 5   Study1 2024-09-09      PM       1092      49
-#> 6   Study1 2024-09-09      PM       1097      44
+#> 1   Study1 2024-09-11      PM       1001      66
+#> 2   Study1 2024-09-11      PM       1068      53
+#> 3   Study1 2024-09-11      PM       1069      51
+#> 4   Study1 2024-09-11      PM       1074      57
+#> 5   Study1 2024-09-11      PM       1092      49
+#> 6   Study1 2024-09-11      PM       1097      44
 ```

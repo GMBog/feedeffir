@@ -42,6 +42,7 @@ compile_milkcomp_files <- function(exp = NA, dir) {
 #'
 #' @param exp a character string representing the name of the experiment
 #' @param dir a character string representing the directory with milk composition files in Excel format
+#' @param output_dir a character string representing the output directory
 #'
 #' @return An Excel file with the compiled milk weights data
 #'
@@ -49,7 +50,7 @@ compile_milkcomp_files <- function(exp = NA, dir) {
 #' @export compile_milkw_files
 #'
 #' @import openxlsx
-compile_milkw_files <- function(exp = NA, dir) {
+compile_milkw_files <- function(exp = NA, dir, output_dir) {
   ## Initialize an empty data frame to store the merged data
   data <- data.frame()
 
@@ -73,15 +74,11 @@ compile_milkw_files <- function(exp = NA, dir) {
   data <- data %>%
     dplyr::distinct()
 
-  data$MilkLbs[data$MilkLbs == 0] <- NA
-
-  data <- data %>%
-    dplyr::group_by(Visible_ID) %>%
-    dplyr::mutate(MilkLbs1 = ifelse(MilkLbs %in% boxplot.stats(MilkLbs)$out, NA, MilkLbs)) %>%
-    dplyr::ungroup()
+  data$MilkLbs[data$MilkLbs == 0] <- "."
 
   # Save file
-  openxlsx::write.xlsx(data, paste0("~/Downloads/UW_", exp, "_MilkWeights", Sys.Date(), ".xlsx"))
+  openxlsx::write.xlsx(data,
+                       paste0(output_dir, "/UW_", exp, "_MilkWeights", Sys.Date(), ".xlsx"))
 }
 
 
