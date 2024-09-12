@@ -5,6 +5,7 @@
 #'
 #' @param exp a character string representing the name of the experiment
 #' @param dir a character string representing the directory with milk composition files in Excel format
+#' @param output_dir a character string representing the output directory
 #'
 #' @return An Excel file with the compiled milk composition data
 #'
@@ -12,7 +13,7 @@
 #' @export compile_milkcomp_files
 #'
 #' @import openxlsx
-compile_milkcomp_files <- function(exp = NA, dir) {
+compile_milkcomp_files <- function(exp = NA, dir, output_dir) {
   # Process files using the function to read csv files
   data <- process_files(dir)
 
@@ -31,7 +32,8 @@ compile_milkcomp_files <- function(exp = NA, dir) {
   )
 
   # Save file
-  openxlsx::write.xlsx(data, paste0("~/Downloads/UW_", exp, "_MilkComposition", Sys.Date(), ".xlsx"))
+  openxlsx::write.xlsx(data,
+                       paste0(output_dir, "/UW_", exp, "_MilkComposition", Sys.Date(), ".xlsx"))
 }
 
 
