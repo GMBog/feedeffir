@@ -47,11 +47,7 @@ To work with **raw data**, use functions to preprocess and create the initial da
 * `process_DC_milkw()`
 * `process_AFI_milkw()`
 
-To compile data, use the compilers:
-
-* `compile_bw_files()`
-* `compile_milkw_files()`
-* `compile_milkcomp_files()`
+To compile data, use the `compiler()` function with different types of files (body weights, milk weights, milk composition, and VR).
 
 To analyze **compiled feed efficiency files**, use functions which expect compiled data:
 
@@ -70,13 +66,11 @@ This is a basic example which shows you how to solve a common problem:
 library(feedeffir)
 
 # Process VR files with intakes
-file_path <- system.file("extdata", "VR240724.DAT", package = "feedeffir")
-
 data <- process_VRfiles(
   exp = "Study1",
-  VRfile = file_path,
+  VRfile = system.file("extdata", "VR240724.DAT", package = "feedeffir"),
   bins = seq(1, 32),
-  output_dir = tempdir()
+  save_dir = tempdir()
 )
 
 head(data)
@@ -89,10 +83,9 @@ head(data)
 
 
 # Process milk weights from Dairy Comp
-exp <- "Study1"
-file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
-output_dir <- tempdir()
-data <- process_DC_milkw(exp, file_path, output_dir)
+data <- process_DC_milkw(exp = "Study1", 
+                         file_path = system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir"), 
+                         save_dir = tempdir())
 
 head(data)
 ```

@@ -7,7 +7,7 @@
 #' @param exp A character string specifying the experiment ID to use in file paths and processing.
 #' @param VRfile VRfile with intakes
 #' @param bins Vector with the number of bins to be used. For example, 'seq(1,32)' or 'c(1,2,3,4,5,6, ..., 32)'
-#' @param output_dir The directory path where the output files should be saved.
+#' @param save_dir The directory path where the output files should be saved.
 #'
 #' @return A plot with the Fed in Kg per animal and an Excel file with the intakes.
 #'
@@ -26,7 +26,7 @@ utils::globalVariables(c(
   "TotalDiet", "Diet", "Percentage"
 ))
 
-process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir) {
+process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), save_dir) {
   # Read the intake file
   VR <- readr::read_csv(VRfile, col_names = FALSE, col_types = cols(X1 = col_character())) %>%
     dplyr::select(-12:-16) %>%
@@ -166,10 +166,10 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), output_dir) {
       Diets_Fedcows = Diets_per_cow,
       Final_Data = Final_data
     ),
-    path = paste0(output_dir, "/Intakes_", Date, ".xlsx")
+    path = paste0(save_dir, "/Intakes_", Date, ".xlsx")
   )
 
-  message("The VR file was processed and the result saved at ", output_dir)
+  message("The VR file was processed and the result saved at ", save_dir)
 
   return(Final_data)
 }

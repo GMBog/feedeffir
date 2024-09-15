@@ -10,7 +10,7 @@
 
 \item{bins}{Vector with the number of bins to be used. For example, 'seq(1,32)' or 'c(1,2,3,4,5,6, ..., 32)'}
 
-\item{output_dir}{The directory path where the output files should be saved.}
+\item{save_dir}{The directory path where the output files should be saved.}
 }
 \value{
 A plot with the Fed in Kg per animal and an Excel file with the intakes.

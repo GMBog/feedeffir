@@ -8,7 +8,7 @@
 
 \item{file_path}{a character string representing the file path to Excel or CSV file downloaded from DC}
 
-\item{output_dir}{a character string representing the directory path where the output files should be saved}
+\item{save_dir}{a character string representing the directory path where the output files should be saved}
 
 \item{late}{a numeric value representing the number of days late. By default 1}
 
@@ -30,7 +30,7 @@ Compiles and formats milk weight files from Dairy Comp system.
 data <- process_DC_milkw(
   exp = "Test",
   file_path = system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir"),
-  output_dir = getwd(),
+  save_dir = getwd(),
   rm.out = FALSE
 )
 

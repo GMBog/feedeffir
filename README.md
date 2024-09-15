@@ -46,11 +46,8 @@ initial data sets:
 - `process_DC_milkw()`
 - `process_AFI_milkw()`
 
-To compile data, use the compilers:
-
-- `compile_bw_files()`
-- `compile_milkw_files()`
-- `compile_milkcomp_files()`
+To compile data, use the `compiler()` function with different types of
+files (body weights, milk weights, milk composition, and VR).
 
 To analyze **compiled feed efficiency files**, use functions which
 expect compiled data:
@@ -70,15 +67,13 @@ This is a basic example which shows you how to solve a common problem:
 library(feedeffir)
 
 # Process VR files with intakes
-file_path <- system.file("extdata", "VR240724.DAT", package = "feedeffir")
-
 data <- process_VRfiles(
   exp = "Study1",
-  VRfile = file_path,
+  VRfile = system.file("extdata", "VR240724.DAT", package = "feedeffir"),
   bins = seq(1, 32),
-  output_dir = tempdir()
+  save_dir = tempdir()
 )
-#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmpwEzsxV
+#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmpTQwVbw
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -104,28 +99,27 @@ head(data)
 
 
 # Process milk weights from Dairy Comp
-exp <- "Study1"
-file_path <- system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir")
-output_dir <- tempdir()
-data <- process_DC_milkw(exp, file_path, output_dir)
+data <- process_DC_milkw(exp = "Study1", 
+                         file_path = system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir"), 
+                         save_dir = tempdir())
 #> Number of cows in file: 64
 #> Time range:
+#> 2024-09-14
+#> 2024-09-13
+#> 2024-09-12
 #> 2024-09-11
 #> 2024-09-10
 #> 2024-09-09
 #> 2024-09-08
-#> 2024-09-07
-#> 2024-09-06
-#> 2024-09-05
 #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #>    0.00   45.00   53.00   52.88   62.00   89.00
 
 head(data)
 #>   Trial_ID       Date MilkNum Visible_ID MilkLbs
-#> 1   Study1 2024-09-11      PM       1001      66
-#> 2   Study1 2024-09-11      PM       1068      53
-#> 3   Study1 2024-09-11      PM       1069      51
-#> 4   Study1 2024-09-11      PM       1074      57
-#> 5   Study1 2024-09-11      PM       1092      49
-#> 6   Study1 2024-09-11      PM       1097      44
+#> 1   Study1 2024-09-14      PM       1001      66
+#> 2   Study1 2024-09-14      PM       1068      53
+#> 3   Study1 2024-09-14      PM       1069      51
+#> 4   Study1 2024-09-14      PM       1074      57
+#> 5   Study1 2024-09-14      PM       1092      49
+#> 6   Study1 2024-09-14      PM       1097      44
 ```

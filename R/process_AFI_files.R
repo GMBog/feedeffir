@@ -67,7 +67,18 @@ process_AFI_milkw <- function(exp = NA, dir1, dir2) {
   ## Step 2: Merge MW files generated in the step 1 with those from previous weeks
 
   # Process files using the function for read.csv files
-  data2 <- process_files(dir2)
+  file_list <- list.files(dir2, full.names = TRUE)
+  print(file_list)
+
+  data2 <- data.frame() # Initialize an empty data frame
+
+  for (file in file_list) {
+    # Process files with no extension (assume space-separated)
+    temp <- utils::read.csv(file, sep = " ", header = TRUE)
+
+    # Append data to the main data frame
+    data2 <- dplyr::bind_rows(data2, temp)
+  }
 
   # Remove duplicates
   data2 <- data2 %>%

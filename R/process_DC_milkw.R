@@ -7,7 +7,7 @@
 #'
 #' @param exp a character string representing the name of the experiment
 #' @param file_path a character string representing the file path to Excel or CSV file downloaded from DC
-#' @param output_dir a character string representing the directory path where the output files should be saved
+#' @param save_dir a character string representing the directory path where the output files should be saved
 #' @param late a numeric value representing the number of days late. By default 1
 #' @param rm.out A logical flag (default FALSE). If TRUE, outliers based on the standard deviation of milk weights are removed.
 #'
@@ -20,7 +20,7 @@
 #' data <- process_DC_milkw(
 #'   exp = "Test",
 #'   file_path = system.file("extdata", "MilkWeight_DCfile.xls", package = "feedeffir"),
-#'   output_dir = getwd(),
+#'   save_dir = getwd(),
 #'   rm.out = FALSE
 #' )
 #'
@@ -34,7 +34,7 @@
 utils::globalVariables(c("AM_PM", "ID", "Trial_ID", "value", "variable", "Y"))
 
 # Function to format milk weights from Dairy Comp system
-process_DC_milkw <- function(exp = NA, file_path, output_dir, late = 1, rm.out = FALSE) {
+process_DC_milkw <- function(exp = NA, file_path, save_dir, late = 1, rm.out = FALSE) {
   # 1. Open the Excel or csv file
   if (tolower(tools::file_ext(file_path)) == "csv") {
     MilkWeights <- readr::read_csv(file_path)
@@ -87,7 +87,7 @@ process_DC_milkw <- function(exp = NA, file_path, output_dir, late = 1, rm.out =
 
   # 6. Save milk weights file in Excel or without format
   file_path <- paste0(
-    output_dir, exp, "_MilkWeights",
+    save_dir, exp, "_MilkWeights",
     lubridate::month(max(data$Date)),
     lubridate::day(max(data$Date)), "to",
     lubridate::month(min(data$Date)),
