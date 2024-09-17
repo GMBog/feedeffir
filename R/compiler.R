@@ -54,7 +54,7 @@ compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NU
   } else if (type == "mw") {
     # Process milk weights files
     for (file in file_list) {
-      temp <- readr::read_csv(file, sep = "")
+      temp <- utils::read.csv(file, sep = "")
 
       # Append data to the main data frame
       data <- dplyr::bind_rows(data, temp)
