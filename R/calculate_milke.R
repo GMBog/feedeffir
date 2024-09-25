@@ -24,9 +24,7 @@ utils::globalVariables(c("MilkNum", "MilkLbs", "week", "FatLbs", "ProtLbs", "Lac
 
 calculate_milke <- function(file1, file2, start_date,
                             coeff1 = 9.29, coeff2 = 5.85, coeff3 = 3.95) {
-  MilkWeights <- readxl::read_excel(file1)
-
-  MilkWeights$MilkLbs <- as.numeric(MilkWeights$MilkLbs)
+  MilkWeights <- readxl::read_excel(file1, col_types = c("text", "date", "text", "text", "numeric"))
 
   MilkWeights <- MilkWeights %>%
     dplyr::select(Visible_ID = Visible_ID, Date = Date, MilkNum, MilkLbs) %>%
@@ -34,8 +32,6 @@ calculate_milke <- function(file1, file2, start_date,
       MilkLbs = ifelse(MilkLbs == 0, NA, MilkLbs),
       MilkKg = round(MilkLbs / 2.205, 2)
     )
-
-  MilkWeights$Visible_ID <- as.character(MilkWeights$Visible_ID)
 
   MilkComposition <- read_excel(file2, col_types = c("text", "date", "text", "text", rep("numeric", 6)))
 
