@@ -8,7 +8,7 @@
 #' @param dir1 a character string representing the directory with files from AFI system (.txt)
 #' @param dir2 a character string representing the directory with CSV files
 #'
-#' @return A table with the compiled milk weights from AFI system
+#' @return A table with compiled milk weights from AFI system will be save in dir1
 #' @examples
 #' @export process_AFI_milkw
 #'
@@ -88,5 +88,5 @@ process_AFI_milkw <- function(exp = NA, dir1, dir2) {
     dplyr::ungroup()
 
   # Save milk weights file in Excel or without format
-  write.table(data2, file = paste0("~/Downloads/UW_", exp, "_MilkWeights", Sys.Date()), row.names = F, quote = F)
+  write.table(data2, file = paste0(dir1, "/UW_", exp, "_MilkWeights", Sys.Date()), row.names = F, quote = F)
 }

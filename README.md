@@ -49,13 +49,6 @@ initial data sets:
 To compile data, use the `compiler()` function with different types of
 files (body weights, milk weights, milk composition, and VR).
 
-To analyze **compiled feed efficiency files**, use functions which
-expect compiled data:
-
-- `process_bw()`
-- `process_intakes()`
-- `calculate_milke()`
-
 For detailed examples of how to use these functions, refer to the
 [Examples](#examples) section.
 
@@ -73,7 +66,7 @@ data <- process_VRfiles(
   bins = seq(1, 32),
   save_dir = tempdir()
 )
-#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmpTQwVbw
+#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmpwISKHA
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -104,22 +97,22 @@ data <- process_DC_milkw(exp = "Study1",
                          save_dir = tempdir())
 #> Number of cows in file: 64
 #> Time range:
-#> 2024-09-14
-#> 2024-09-13
-#> 2024-09-12
-#> 2024-09-11
-#> 2024-09-10
-#> 2024-09-09
-#> 2024-09-08
+#> 2025-02-01
+#> 2025-01-31
+#> 2025-01-30
+#> 2025-01-29
+#> 2025-01-28
+#> 2025-01-27
+#> 2025-01-26
 #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #>    0.00   45.00   53.00   52.88   62.00   89.00
 
 head(data)
 #>   Trial_ID       Date MilkNum Visible_ID MilkLbs
-#> 1   Study1 2024-09-14      PM       1001      66
-#> 2   Study1 2024-09-14      PM       1068      53
-#> 3   Study1 2024-09-14      PM       1069      51
-#> 4   Study1 2024-09-14      PM       1074      57
-#> 5   Study1 2024-09-14      PM       1092      49
-#> 6   Study1 2024-09-14      PM       1097      44
+#> 1   Study1 2025-02-01      PM       1001      66
+#> 2   Study1 2025-02-01      PM       1068      53
+#> 3   Study1 2025-02-01      PM       1069      51
+#> 4   Study1 2025-02-01      PM       1074      57
+#> 5   Study1 2025-02-01      PM       1092      49
+#> 6   Study1 2025-02-01      PM       1097      44
 ```

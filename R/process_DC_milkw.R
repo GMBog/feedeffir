@@ -31,7 +31,7 @@
 #' @import lubridate
 #' @import readr
 #' @import readxl
-utils::globalVariables(c("AM_PM", "ID", "Trial_ID", "value", "variable", "Y"))
+utils::globalVariables(c("AM_PM", "ID", "Trial_ID", "value", "variable", "Y", "MilkLbs"))
 
 # Function to format milk weights from Dairy Comp system
 process_DC_milkw <- function(exp = NA, file_path, save_dir, late = 1, rm.out = FALSE) {

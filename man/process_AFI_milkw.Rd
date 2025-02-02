@@ -11,7 +11,7 @@
 \item{dir2}{a character string representing the directory with CSV files}
 }
 \value{
-A table with the compiled milk weights from AFI system
+A table with compiled milk weights from AFI system will be save in dir1
 }
 \description{
 Compiles and formats milk weight files from AFI system.

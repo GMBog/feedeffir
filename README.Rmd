@@ -49,12 +49,6 @@ To work with **raw data**, use functions to preprocess and create the initial da
 
 To compile data, use the `compiler()` function with different types of files (body weights, milk weights, milk composition, and VR).
 
-To analyze **compiled feed efficiency files**, use functions which expect compiled data:
-
-* `process_bw()`
-* `process_intakes()`
-* `calculate_milke()` 
-
 For detailed examples of how to use these functions, refer to the [Examples](#examples) section.
 
 

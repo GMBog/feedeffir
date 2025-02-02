@@ -19,10 +19,8 @@ RoxygenNote: 7.3.2
 Imports:
     dplyr,
     ggplot2,
-    grDevices,
     lubridate,
     openxlsx,
-    purrr,
     readr,
     reshape2,
     readxl,
