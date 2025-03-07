@@ -91,7 +91,7 @@ process_DC_milkw <- function(exp = NA, file_path, save_dir, late = 1, rm.out = F
     lubridate::month(max(data$Date)),
     lubridate::day(max(data$Date)), "to",
     lubridate::month(min(data$Date)),
-    lubridate::day(min(data$Date))
+    lubridate::day(min(data$Date)), ".xlsx"
   )
   openxlsx::write.xlsx(data, file = file_path)
 
