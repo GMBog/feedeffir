@@ -93,7 +93,7 @@ process_DC_milkw <- function(exp = NA, file_path, save_dir, late = 1, rm.out = F
     lubridate::month(min(data$Date)),
     lubridate::day(min(data$Date))
   )
-  write.table(data, file = file_path, row.names = F)
+  openxlsx::write.xlsx(data, file = file_path)
 
   return(data)
 }
