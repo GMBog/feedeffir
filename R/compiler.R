@@ -37,7 +37,7 @@ compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NU
       ext <- tools::file_ext(file) # Get the file extension
 
       if (ext == "xlsx") {
-        temp <- readxl::read_excel(file, col_types = c("text", "text", "numeric"))
+        temp <- readxl::read_excel(file, col_types = c("text", "date", "numeric"))
       } else if (ext == "csv") {
         temp <- readr::read_csv(file)
       } else {
@@ -53,17 +53,29 @@ compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NU
     return(data)
   } else if (type == "mw") {
     # Process milk weights files
-    for (file in file_list) {
-      temp <- utils::read.csv(file, sep = "")
-
-      # Append data to the main data frame
-      data <- dplyr::bind_rows(data, temp)
+    read_mw_file <- function(file) {
+      # Try reading as comma-separated CSV first
+      temp <- tryCatch({
+        readr::read_csv(file)  # Handles both quoted and unquoted fields
+      }, error = function(e) {
+        # If that fails, try reading with space-separated values
+        read.csv(file, sep = "")
+      })
+      return(temp)
     }
+
+    # Read and combine all files
+    data <- purrr::map_dfr(file_list, read_mw_file)
 
     # Clean and remove duplicates
     data <- data %>%
-      dplyr::distinct() %>%
-      dplyr::mutate(MilkLbs = ifelse(MilkLbs == 0, ".", MilkLbs))
+      dplyr::distinct()
+
+    # Check if 'MilkLbs' exists before modifying it
+    if ("MilkLbs" %in% names(data)) {
+      data <- data %>%
+        dplyr::mutate(MilkLbs = ifelse(MilkLbs == 0, ".", MilkLbs))
+    }
 
     # Save the compiled data
     openxlsx::write.xlsx(data, paste0(save_dir, "/UW_", exp, "_MilkWeights_", Sys.Date(), ".xlsx"))

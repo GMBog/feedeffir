@@ -57,11 +57,15 @@ process_AFI_milkw <- function(exp = NA, dir1, dir2) {
   # Process AFI files
   data1 <- process_AFI_files(dir1)
 
-  # Save milk weights file in Excel or without format
-  write.table(data1,
-    file = paste0(dir2, exp, "_MilkWeights", Sys.Date()),
-    sep = " ", row.names = TRUE, col.names = TRUE
-  )
+  if (nrow(data1) == 0) {
+    message("No valid data found in dir1, skipping Step 1 and proceeding to Step 2")
+  } else {
+    # Save milk weights file in Excel or without format
+    write.table(data1,
+                file = paste0(dir2, exp, "_MilkWeights", Sys.Date()),
+                sep = " ", row.names = TRUE, col.names = TRUE
+    )
+  }
 
 
   ## Step 2: Merge MW files generated in the step 1 with those from previous weeks
