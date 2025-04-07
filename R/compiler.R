@@ -17,9 +17,10 @@
 #'
 #' @import dplyr
 #' @importFrom dplyr %>%
+#' @import openxlsx
+#' @import purrr
 #' @import readr
 #' @import readxl
-#' @import openxlsx
 #' @import utils
 compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NULL) {
   # Ensure the type parameter is lowercase

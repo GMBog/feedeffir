@@ -25,8 +25,8 @@ The goal of feedeffir is to process feed efficiency files and calculate total dr
 You can install the development version of feedeffir from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
-pak::pak("GMBog/feedeffir")
+#install.packages("remotes")
+remotes::install_github("GMBog/feedeffir")
 ```
 
 feedeffir handles two main types of data:

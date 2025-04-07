@@ -21,6 +21,7 @@ Imports:
     ggplot2,
     lubridate,
     openxlsx,
+    purrr,
     readr,
     reshape2,
     readxl,
