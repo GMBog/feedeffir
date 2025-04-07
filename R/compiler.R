@@ -54,14 +54,21 @@ compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NU
   } else if (type == "mw") {
     # Process milk weights files
     read_mw_file <- function(file) {
-      # Try reading as comma-separated CSV first
-      temp <- tryCatch({
-        readr::read_csv(file)  # Handles both quoted and unquoted fields
-      }, error = function(e) {
-        # If that fails, try reading with space-separated values
-        read.csv(file, sep = "")
-      })
-      return(temp)
+      # Get file extension
+      ext <- tools::file_ext(file)
+
+      # Read based on extension
+      if (ext == "xlsx") {
+        temp <- readxl::read_excel(file)
+      } else {
+        # Try reading as comma-separated CSV first
+        temp <- tryCatch({
+          readr::read_csv(file)
+        }, error = function(e) {
+          # If that fails, try reading with space-separated values
+          read.csv(file, sep = "")
+        })
+      }
     }
 
     # Read and combine all files
