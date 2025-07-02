@@ -92,7 +92,7 @@ compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NU
   } else if (type == "mcomp") {
     # Process milk composition files
     for (file in file_list) {
-      temp <- readxl::read_excel(file, col_types = c("numeric", "date", "numeric", "text", rep("numeric", 6)))
+      temp <- readxl::read_excel(file, col_types = c("numeric", "text", "numeric", "text", rep("numeric", 6)))
 
       # Append data to the main data frame
       data <- dplyr::bind_rows(data, temp)
@@ -108,8 +108,8 @@ compiler <- function(exp = NA, dir, save_dir, type, compfile = NULL, vrdata = NU
       "PrtPct",
       "LacPct",
       "SnF",
-      "Urea",
-      "Cells"
+      "Cells",
+      "Urea"
     )
 
     # Save the compiled data
