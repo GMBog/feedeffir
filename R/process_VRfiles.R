@@ -186,7 +186,11 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), save_dir) {
     dplyr::group_by(Visible_ID) %>%
     dplyr::slice(1) %>%
     dplyr::ungroup() %>%
-    dplyr::filter(num_feeds > 1 & pctFeed < 99)
+    dplyr::filter(num_feeds > 1 & pctFeed < 99) %>%
+    dplyr::arrange(pctFeed) %>%
+    dplyr::rename(MainFeed = Feed,
+                  PctFeed = pctFeed,
+                  FeedAte = num_feeds)
 
 
   # Step 12: Create an Excel file with all tables
