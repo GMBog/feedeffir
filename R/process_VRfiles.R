@@ -125,11 +125,24 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), save_dir) {
   Bottom10 <- head(Final_data[order(Final_data$FedKg), ], 10)
 
   # Step 9: Plot intakes by cow by diet
-  plot <- ggplot2::ggplot(Final_data, ggplot2::aes(x = as.character(Visible_ID), y = FedKg, fill = Feed)) +
-    ggplot2::geom_col(width = 0.3) +
+  VR %>%
+    dplyr::group_by(Visible_ID = X2, Feed = X9) %>%
+    dplyr::summarise(
+      TrialID = first(exp),
+      Date = first(Date),
+      FedKg = sum(X10)
+    ) %>%
+    dplyr::select(TrialID, Date, Visible_ID, Feed, FedKg) %>%
+    dplyr::mutate(
+      Visible_ID = as.numeric(Visible_ID),
+      Obs = NA
+    ) %>%
+
+    ggplot2::ggplot(., ggplot2::aes(x = as.character(Visible_ID), y = FedKg, fill = Feed)) +
+    ggplot2::geom_col(width = 0.5) +
     ggplot2::theme_grey() +
     ggplot2::theme(
-      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1.05, size = 8, family = "Times New Roman"),
+      axis.text.x = ggplot2::element_text(angle = 90, hjust = 1.05, size = 8, family = "Times New Roman"),
       axis.text.y = ggplot2::element_text(hjust = 1.05, size = 8, family = "Times New Roman"),
       axis.title.x = ggplot2::element_text(size = 12, family = "Times New Roman", face = "bold"),
       axis.title.y = ggplot2::element_text(size = 12, family = "Times New Roman", face = "bold"),
@@ -152,7 +165,31 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), save_dir) {
     tidyr::pivot_wider(names_from = Diet, values_from = Percentage) %>%
     mutate_at(vars(-Visible_ID), ~ ifelse(. == 0, NA, .))
 
-  # Step 11: Create an Excel file with all tables
+  # Step 11: Identify mixer cows
+  mixed_diet_cows <- VR %>%
+    dplyr::group_by(Visible_ID = X2, Feed = X9) %>%
+    dplyr::summarise(
+      TrialID = first(exp),
+      Date = first(Date),
+      FedKg = sum(X10)
+    ) %>%
+    dplyr::select(TrialID, Date, Visible_ID, Feed, FedKg) %>%
+    dplyr::group_by(Visible_ID, Feed) %>%
+    dplyr::summarise(FedKg = sum(FedKg, na.rm = TRUE),
+                     .groups = "drop") %>%
+    dplyr::group_by(Visible_ID) %>%
+    dplyr::mutate(TotalFedKg = sum(FedKg),
+                  pctFeed = round((FedKg / TotalFedKg)*100,1)) %>%
+    dplyr::ungroup() %>%
+    dplyr::add_count(Visible_ID, name = "num_feeds") %>%
+    dplyr::arrange(Visible_ID, desc(pctFeed)) %>%
+    dplyr::group_by(Visible_ID) %>%
+    dplyr::slice(1) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(num_feeds > 1 & pctFeed < 99)
+
+
+  # Step 12: Create an Excel file with all tables
   writexl::write_xlsx(
     list(
       Raw_Data = Raw_data,
@@ -164,6 +201,7 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), save_dir) {
       Bottom10 = Bottom10,
       Multiple_Diets = Diets,
       Diets_Fedcows = Diets_per_cow,
+      Mixer_cows = mixed_diet_cows,
       Final_Data = Final_data
     ),
     path = paste0(save_dir, "/Intakes_", Date, ".xlsx")
