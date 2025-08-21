@@ -125,7 +125,7 @@ process_VRfiles <- function(exp = NA, VRfile, bins = seq(1, 32), save_dir) {
   Bottom10 <- head(Final_data[order(Final_data$FedKg), ], 10)
 
   # Step 9: Plot intakes by cow by diet
-  VR %>%
+  plot <- VR %>%
     dplyr::group_by(Visible_ID = X2, Feed = X9) %>%
     dplyr::summarise(
       TrialID = first(exp),
