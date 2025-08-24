@@ -43,6 +43,7 @@ To work with **raw data**, use functions to preprocess and create the
 initial data sets:
 
 - `process_VRfiles()`
+- `mixers()`
 - `process_DC_milkw()`
 - `process_AFI_milkw()`
 
@@ -66,7 +67,7 @@ data <- process_VRfiles(
   bins = seq(1, 32),
   save_dir = tempdir()
 )
-#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//RtmphByp1y
+#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//Rtmp8jsg3Z
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -97,22 +98,22 @@ data <- process_DC_milkw(exp = "Study1",
                          save_dir = tempdir())
 #> Number of cows in file: 64
 #> Time range:
-#> 2025-04-06
-#> 2025-04-05
-#> 2025-04-04
-#> 2025-04-03
-#> 2025-04-02
-#> 2025-04-01
-#> 2025-03-31
+#> 2025-08-23
+#> 2025-08-22
+#> 2025-08-21
+#> 2025-08-20
+#> 2025-08-19
+#> 2025-08-18
+#> 2025-08-17
 #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #>    0.00   45.00   53.00   52.88   62.00   89.00
 
 head(data)
 #>   Trial_ID       Date MilkNum Visible_ID MilkLbs
-#> 1   Study1 2025-04-06      PM       1001      66
-#> 2   Study1 2025-04-06      PM       1068      53
-#> 3   Study1 2025-04-06      PM       1069      51
-#> 4   Study1 2025-04-06      PM       1074      57
-#> 5   Study1 2025-04-06      PM       1092      49
-#> 6   Study1 2025-04-06      PM       1097      44
+#> 1   Study1 2025-08-23      PM       1001      66
+#> 2   Study1 2025-08-23      PM       1068      53
+#> 3   Study1 2025-08-23      PM       1069      51
+#> 4   Study1 2025-08-23      PM       1074      57
+#> 5   Study1 2025-08-23      PM       1092      49
+#> 6   Study1 2025-08-23      PM       1097      44
 ```

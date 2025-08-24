@@ -44,6 +44,7 @@ feedeffir handles two main types of data:
 To work with **raw data**, use functions to preprocess and create the initial data sets:
 
 * `process_VRfiles()`
+* `mixers()`
 * `process_DC_milkw()`
 * `process_AFI_milkw()`
 
