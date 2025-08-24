@@ -63,7 +63,7 @@ library(feedeffir)
 # Process VR files with intakes
 data <- process_VRfiles(
   exp = "Study1",
-  VRfile = system.file("extdata", "VR240724.DAT", package = "feedeffir"),
+  VRfile = system.file("extdata", "VR250412.DAT", package = "feedeffir"),
   bins = seq(1, 32),
   save_dir = tempdir()
 )

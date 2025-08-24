@@ -63,11 +63,11 @@ library(feedeffir)
 # Process VR files with intakes
 data <- process_VRfiles(
   exp = "Study1",
-  VRfile = system.file("extdata", "VR240724.DAT", package = "feedeffir"),
+  VRfile = system.file("extdata", "VR250412.DAT", package = "feedeffir"),
   bins = seq(1, 32),
   save_dir = tempdir()
 )
-#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//Rtmp8jsg3Z
+#> The VR file was processed and the result saved at /var/folders/8n/lmf4l1hs7jz2m86j5g16k21c0000gn/T//Rtmp5ztHxV
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -78,12 +78,12 @@ head(data)
 #> # A tibble: 6 × 6
 #>   TrialID Date       Visible_ID Feed  FedKg Obs  
 #>   <chr>   <date>          <dbl> <chr> <dbl> <lgl>
-#> 1 Study1  2024-07-24       1009 TMR01  54.1 NA   
-#> 2 Study1  2024-07-24       1023 TMR01  50.2 NA   
-#> 3 Study1  2024-07-24       1035 TMR01  46.2 NA   
-#> 4 Study1  2024-07-24       1281 TMR01  61.7 NA   
-#> 5 Study1  2024-07-24       1291 TMR01  64.5 NA   
-#> 6 Study1  2024-07-24       1334 TMR01  59.7 NA
+#> 1 Study1  2025-04-12       1033 HS     79.9 NA   
+#> 2 Study1  2025-04-12       1062 LS     66.3 NA   
+#> 3 Study1  2025-04-12       1064 LS     81.1 NA   
+#> 4 Study1  2025-04-12       1115 HS     90.8 NA   
+#> 5 Study1  2025-04-12       1124 HS     70.9 NA   
+#> 6 Study1  2025-04-12       1143 LS     73.4 NA
 
 # The next step is to compile the processed VR files
 # compile_VRfiles(dir = "~/Downloads/files/",
